@@ -25,7 +25,7 @@ public partial class MainWindow
 
         var engine = new StatusEngine(vr)
         {
-            Mode = StatusMode.Cycle,
+            Mode = StatusMode.Combined,
             DelayMs = 3000
         };
 

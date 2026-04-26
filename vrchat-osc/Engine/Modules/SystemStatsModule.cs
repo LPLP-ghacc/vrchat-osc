@@ -13,6 +13,6 @@ public class SystemStatsModule : BaseModule
             var proc = Process.GetCurrentProcess();
             var ram = proc.WorkingSet64 / 1024 / 1024;
 
-            return $"🎛️ RAM {ram}MB";
+            return $"RAM {ram}MB";
         });
 }

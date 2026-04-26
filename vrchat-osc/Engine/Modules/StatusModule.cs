@@ -9,7 +9,7 @@ public class StatusModule(VrChatService vrChat)
         while (true)
         {
             var time = DateTime.Now.ToString("HH:mm");
-            var status = $"🕒 {time}";
+            var status = $"{time}";
 
             await vrChat.SendChatMessageAsync(status);
 

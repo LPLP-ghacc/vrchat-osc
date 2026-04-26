@@ -6,5 +6,5 @@ public class TimeModule : BaseModule
     public override int Priority => 1;
 
     public override Task<string> GetTextAsync()
-        => Safe(() => $"🕒 {DateTime.Now:HH:mm}");
+        => Safe(() => $"{DateTime.Now:HH:mm}");
 }

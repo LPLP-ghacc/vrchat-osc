@@ -7,5 +7,5 @@ public class RadarModule : BaseModule
     public int NearbyUsers { get; set; }
 
     public override Task<string> GetTextAsync()
-        => Safe(() => $"📶 {NearbyUsers} nearby");
+        => Safe(() => $"{NearbyUsers} nearby");
 }

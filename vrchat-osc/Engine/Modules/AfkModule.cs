@@ -8,5 +8,5 @@ public class AfkModule : BaseModule
     public bool IsAfk { get; set; }
 
     public override Task<string> GetTextAsync()
-        => Safe(() => IsAfk ? "💤 AFK" : "");
+        => Safe(() => IsAfk ? "AFK" : "");
 }

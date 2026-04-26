@@ -7,5 +7,5 @@ public class SoundpadModule : BaseModule
     public string CurrentSound { get; set; } = "";
 
     public override Task<string> GetTextAsync()
-        => Safe(() => string.IsNullOrEmpty(CurrentSound) ? "" : $"🎼 {CurrentSound}");
+        => Safe(() => string.IsNullOrEmpty(CurrentSound) ? "" : $"{CurrentSound}");
 }

@@ -7,5 +7,5 @@ public class TwitchModule : BaseModule
     public int Viewers { get; set; }
 
     public override Task<string> GetTextAsync()
-        => Safe(() => Viewers > 0 ? $"📺 {Viewers} viewers" : "");
+        => Safe(() => Viewers > 0 ? $"{Viewers} viewers" : "");
 }

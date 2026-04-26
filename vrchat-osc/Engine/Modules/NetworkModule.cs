@@ -15,7 +15,7 @@ public class NetworkModule : BaseModule
         {
             var ping = new Ping();
             var reply = await ping.SendPingAsync("8.8.8.8");
-            return $"📶 {reply.RoundtripTime}ms";
+            return $"{reply.RoundtripTime}ms";
         }
         catch
         {

@@ -21,6 +21,6 @@ public class WindowActivityModule : BaseModule
             GetWindowText(handle, sb, sb.Capacity);
 
             var title = sb.ToString();
-            return string.IsNullOrWhiteSpace(title) ? "" : $"🧭 {title}";
+            return string.IsNullOrWhiteSpace(title) ? "" : $"{title}";
         });
 }

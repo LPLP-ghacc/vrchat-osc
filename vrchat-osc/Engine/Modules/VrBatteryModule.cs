@@ -7,5 +7,5 @@ public class VrBatteryModule : BaseModule
     public int Battery { get; set; } = 100;
 
     public override Task<string> GetTextAsync()
-        => Safe(() => $"🔋 {Battery}%");
+        => Safe(() => $"{Battery}%");
 }

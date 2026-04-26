@@ -7,5 +7,5 @@ public class HeartRateModule : BaseModule
     public int BPM { get; set; }
 
     public override Task<string> GetTextAsync()
-        => Safe(() => BPM > 0 ? $"🩵 {BPM} BPM" : "");
+        => Safe(() => BPM > 0 ? $"{BPM} BPM" : "");
 }

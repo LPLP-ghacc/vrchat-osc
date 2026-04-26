@@ -18,3 +18,4 @@ C:\Users\alpha\RiderProjects\vrchat-osc\vrchat-osc\obj\Debug\net10.0-windows\ref
 C:\Users\alpha\RiderProjects\vrchat-osc\vrchat-osc\obj\Debug\net10.0-windows\vrchat-osc.pdb
 C:\Users\alpha\RiderProjects\vrchat-osc\vrchat-osc\obj\Debug\net10.0-windows\vrchat-osc.genruntimeconfig.cache
 C:\Users\alpha\RiderProjects\vrchat-osc\vrchat-osc\obj\Debug\net10.0-windows\ref\vrchat-osc.dll
+C:\Users\alpha\RiderProjects\vrchat-osc\vrchat-osc\obj\Debug\net10.0-windows\vrchat-osc.sourcelink.json

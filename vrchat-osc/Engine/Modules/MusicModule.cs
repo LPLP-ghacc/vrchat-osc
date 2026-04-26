@@ -9,5 +9,5 @@ public class MusicModule : BaseModule
     public string CurrentTrack { get; set; } = "";
 
     public override Task<string> GetTextAsync()
-        => Safe(() => string.IsNullOrEmpty(CurrentTrack) ? "" : $"🎶 {CurrentTrack}");
+        => Safe(() => string.IsNullOrEmpty(CurrentTrack) ? "" : $"{CurrentTrack}");
 }
