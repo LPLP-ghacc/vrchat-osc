@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.Win32;
 using vrchat_osc.AppCore;
@@ -143,4 +144,10 @@ public partial class MainWindow
     }
 
     private void SettingsShowButton_OnClick(object sender, RoutedEventArgs e) => OpenUiElement(UserSettingsGrid, sender);
+
+    private void TopBorder_OnMouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.ChangedButton == MouseButton.Left) 
+            DragMove();
+    }
 }

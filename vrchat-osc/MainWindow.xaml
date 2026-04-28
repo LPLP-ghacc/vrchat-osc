@@ -69,7 +69,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Border x:Name="TopBorder" Grid.ColumnSpan="5" >
+            <Border x:Name="TopBorder" Grid.ColumnSpan="5" MouseDown="TopBorder_OnMouseDown">
                 <Grid>
                     <StackPanel Orientation="Horizontal" Background="#4A000000">
                         <TextBlock Text="OSC VRCHAT" 
@@ -162,8 +162,35 @@
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="1">
-                <Grid x:Name="MainGrid" Visibility="Collapsed" IsHitTestVisible="True" 
+                <Grid x:Name="MainGrid" Visibility="Visible" IsHitTestVisible="True" 
                         Background="#05000000">
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        
+                        
+                        <Grid Column="1">
+                            <TextBox x:Name="InputBox" 
+                                     Style="{StaticResource FlatTextBoxStyle}"
+                                     Foreground="{StaticResource PrimaryTextBrush}"
+                                     Background="#3D4756"
+                                     FontFamily="Consolas"
+                                     HorizontalContentAlignment="Center"
+                                     VerticalContentAlignment="Center"
+                                     FontSize="24"
+                                     KeyDown="InputBox_KeyDown"
+                                     Padding="4"
+                                     Margin="5,5,5,5"
+                                     BorderBrush="Gray"
+                                     BorderThickness="1"
+                                     AcceptsReturn="True"
+                                     TextWrapping="Wrap"/>
+                        </Grid>
+                    </Grid>
                 </Grid>
                 <local:SettingsPanel x:Name="UserSettingsGrid" Visibility="Collapsed"/>
             </Grid>

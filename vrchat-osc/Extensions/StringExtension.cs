@@ -8,7 +8,7 @@ public static class StringExtension
 {
     public static void Log(this string message)
     {
-        MainWindow.Instance.Log(message);
+        MainWindow.Log(message);
     }
 }
 

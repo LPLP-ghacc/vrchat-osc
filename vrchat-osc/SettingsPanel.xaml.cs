@@ -1,9 +1,10 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace vrchat_osc;
 
-public partial class SettingsPanel : UserControl
+public partial class SettingsPanel
 {
     public SettingsPanel()
     {
@@ -12,6 +13,10 @@ public partial class SettingsPanel : UserControl
 
     private void OpenGitHub(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = "https://github.com/LPLP-ghacc/vrchat-osc",
+            UseShellExecute = true
+        });
     }
 }
