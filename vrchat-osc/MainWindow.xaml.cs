@@ -26,7 +26,7 @@ public partial class MainWindow
         var engine = new StatusEngine(vr)
         {
             Mode = StatusMode.Template,
-            Template = "{time}\n{hardware}\n{track}",
+            Template = "пишу OSC для врчата\n{afk}",
             DelayMs = 3000
         };
 
@@ -35,7 +35,9 @@ public partial class MainWindow
         engine.AddModule(new NetworkModule { IsEnabled = true }); //ping
         engine.AddModule(new HardwareModule() { IsEnabled = true }); //hardware
         engine.AddModule(new WindowActivityModule() { IsEnabled = true }); //window
-
+        engine.AddModule(new SoundpadModule() { IsEnabled = true }); //window
+        engine.AddModule(new AfkModule() { IsEnabled = true }); //afk
+        
         _ = engine.StartAsync(_cts.Token);
     }
 }

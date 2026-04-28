@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("vrchat-osc")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d51586513ac75e597bc496c9a6c27aaacf75e1d7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b1e9ebf544bcb6b25d3c606869161e07cbc3a328")]
 [assembly: System.Reflection.AssemblyProductAttribute("vrchat-osc")]
 [assembly: System.Reflection.AssemblyTitleAttribute("vrchat-osc")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
