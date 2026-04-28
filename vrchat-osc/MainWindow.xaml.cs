@@ -1,24 +1,24 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using vrchat_osc.Modules;
+﻿using vrchat_osc.Modules;
 using vrchat_osc.Services;
 
 namespace vrchat_osc;
 
 public partial class MainWindow
 {
+    public static MainWindow Instance { get; private set; } = null!;
     private readonly CancellationTokenSource _cts = new();
 
     public MainWindow()
     {
         InitializeComponent();
+        DataContext = this;
+        Instance = this;
+        
+        Loaded += OnLoaded;
+        
+        _mainFieldElements.Add(MainGrid);
+        _mainFieldElements.Add(UserSettingsGrid);
+        OpenUiElement(MainGrid, MainCanvasShowButton);
 
         var osc = new OscClient();
         var vr = new VrChatService(osc);
@@ -39,5 +39,12 @@ public partial class MainWindow
         engine.AddModule(new AfkModule() { IsEnabled = true }); //afk
         
         _ = engine.StartAsync(_cts.Token);
+    }
+
+    public void Log(string message)
+    {
+        Console.WriteLine(message);
+
+        if (_settings is { IsEnableLog: false }) return;
     }
 }

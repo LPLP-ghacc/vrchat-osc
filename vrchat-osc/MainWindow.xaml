@@ -5,8 +5,168 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:vrchat_osc"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Height="800" Width="1200" 
+        MinHeight="200" MinWidth="600"
+        ResizeMode="CanResizeWithGrip" 
+        AllowsTransparency="False"
+        WindowStyle="None"
+        Foreground="{StaticResource PrimaryTextBrush}" 
+        Title="OSC VRCHAT">
+    
+    <Window.Background>
+        <StaticResource ResourceKey="PrimaryBrush" />
+    </Window.Background>
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+            CaptionHeight="1"
+            ResizeBorderThickness="4" 
+            CornerRadius="5"
+            GlassFrameThickness="10"/>
+    </WindowChrome.WindowChrome>
+    
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#CCFFFFFF"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Width" Value="46"/>
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#33FFFFFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="ResizeGrip">
+            <Setter Property="Background" Value="{StaticResource PrimaryAccentBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ResizeGrip">
+                        <Grid Background="{StaticResource PrimaryAccentBrush}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+ <Grid x:Name="RootGrid" CacheMode="BitmapCache">
+        <Grid.Background>  
+            <ImageBrush x:Name="RootImageBrush" Stretch="UniformToFill" Opacity="0.3"/>     
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <Grid Grid.Row="0">
+            <Border x:Name="TopBorder" Grid.ColumnSpan="5" >
+                <Grid>
+                    <StackPanel Orientation="Horizontal" Background="#4A000000">
+                        <TextBlock Text="OSC VRCHAT" 
+                                   Width="100"
+                                   Foreground="{StaticResource PrimaryTextBrush}" 
+                                   FontSize="13" 
+                                   FontWeight="SemiBold"
+                                   Margin="5"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0">
+                        <TextBlock x:Name="Logger" Margin="5,5,100,5" VerticalAlignment="Center" Foreground="#1200EA0A"/>
+                        <Button x:Name="Minimize" HorizontalAlignment="Right" Width="25" Height="25" Margin="1" Style="{StaticResource FlatButtonStyle}" Click="Minimize_OnClick_Click">
+                            <Grid>
+                                <Line X1="0" Y1="0" X2="15" Y2="0" Stroke="{StaticResource PrimaryTextBrush}" />
+                            </Grid>
+                        </Button>
+                        <Button x:Name="Fullscreen" HorizontalAlignment="Right" Width="25" Height="25" Margin="1" Style="{StaticResource FlatButtonStyle}" Click="Fullscreen_Click">
+                            <Grid>
+                                <Path x:Name="FullscreenEnter" 
+                                      Data="M0,8 L0,0 L8,0 M8,8 L8,16 L0,16 M16,8 L16,0 L8,0 M8,8 L8,16 L16,16"
+                                      Stroke="#CCFFFFFF" 
+                                      StrokeThickness="2"
+                                      StrokeLineJoin="Round"
+                                      Stretch="Uniform"
+                                      Width="14" Height="14"
+                                      Visibility="Visible"/>
+                                <Path x:Name="FullscreenExit" 
+                                      Data="M4,0 L4,8 L0,8 M12,0 L12,8 L16,8 M4,16 L4,8 L0,8 M12,16 L12,8 L16,8"
+                                      Stroke="#CCFFFFFF" 
+                                      StrokeThickness="2"
+                                      StrokeLineJoin="Round"
+                                      Stretch="Uniform"
+                                      Width="14" Height="14"
+                                      Visibility="Collapsed"/>
+                            </Grid>
+                        </Button>
+                        <Button x:Name="Exit" Width="25" Height="25" Margin="1" Style="{StaticResource FlatButtonStyle}" Click="Close_Click">
+                            <Path Data="M14.5,13.5 L1.5,0.5 M1.5,13.5 L14.5,0.5" 
+                                  Stroke="#CCFFFFFF" 
+                                  StrokeThickness="2.3" 
+                                  StrokeLineJoin="Round"
+                                  Stretch="Uniform"
+                                  Width="14" Height="14"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+     
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Background="#4A000000">
+                <StackPanel VerticalAlignment="Top">
+                    <Border CornerRadius="5" Width="30" Height="30" Margin="0,1,0,1">
+                        <Button x:Name="MainCanvasShowButton" Width="25" Height="25" Margin="1" Style="{StaticResource FlatButtonStyle}" Click="MainCanvasShowButton_OnClick">
+                            <Path Data="M0 0h24v24H0z M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14z M13 12h-6 M11 7h-4" 
+                                  Stroke="#CCFFFFFF" 
+                                  Fill="#CCFFFFFF"
+                                  StrokeThickness="1.3" 
+                                  StrokeLineJoin="Round"
+                                  Stretch="Uniform"
+                                  Width="18" Height="18"/>
+                        </Button>
+                    </Border>
+                </StackPanel>
+                
+                <StackPanel VerticalAlignment="Bottom">
+                    <Border CornerRadius="5" Width="30" Height="30" Margin="0,1,0,1">
+                        <Button x:Name="NotificationButton" Visibility="Hidden" Width="25" Height="25" Margin="1" Style="{StaticResource FlatButtonStyle}" Click="NotificationButton_OnClick">
+                            <Path Data="M0 0h24v24H0z M17.451 2.344a1 1 0 0 1 1.41 -.099a12.05 12.05 0 0 1 3.048 4.064a1 1 0 1 1 -1.818 .836a10.05 10.05 0 0 0 -2.54 -3.39a1 1 0 0 1 -.1 -1.41z M5.136 2.245a1 1 0 0 1 1.312 1.51a10.05 10.05 0 0 0 -2.54 3.39a1 1 0 1 1 -1.817 -.835a12.05 12.05 0 0 1 3.045 -4.065z M14.235 19c.865 0 1.322 1.024 .745 1.668a3.992 3.992 0 0 1 -2.98 1.332a3.992 3.992 0 0 1 -2.98 -1.332c-.552 -.616 -.158 -1.579 .634 -1.661l.11 -.006h4.471z M12 2c1.358 0 2.506 .903 2.875 2.141l.046 .171l.008 .043a8.013 8.013 0 0 1 4.024 6.069l.028 .287l.019 .289v2.931l.021 .136a3 3 0 0 0 1.143 1.847l.167 .117l.162 .099c.86 .487 .56 1.766 -.377 1.864l-.116 .006h-16c-1.028 0 -1.387 -1.364 -.493 -1.87a3 3 0 0 0 1.472 -2.063l.021 -.143l.001 -2.97a8 8 0 0 1 3.821 -6.454l.248 -.146l.01 -.043a3.003 3.003 0 0 1 2.562 -2.29l.182 -.017l.176 -.004z" 
+                                  Fill="#CCFF0500"
+                                  StrokeThickness="2" 
+                                  Stretch="Uniform"
+                                  Width="18" Height="18"/>
+                        </Button>
+                    </Border>
+                    <Border CornerRadius="5" Width="30" Height="30" Margin="0,1,0,1">
+                        <Button x:Name="SettingsShowButton" Width="25" Height="25" Margin="1" Style="{StaticResource FlatButtonStyle}" Click="SettingsShowButton_OnClick">
+                            <Path Data="M0 0h24v24H0z M4 8h4v4h-4z M6 4l0 4 M6 12l0 8 M10 14h4v4h-4z M12 4l0 10 M12 18l0 2 M16 5h4v4h-4z M18 4l0 1 M18 9l0 11" 
+                                  Stroke="#CCFFFFFF" 
+                                  StrokeThickness="2" 
+                                  StrokeLineJoin="Round"
+                                  Stretch="Uniform"
+                                  Width="18" Height="18"/>
+                        </Button>
+                    </Border>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid x:Name="MainGrid" Visibility="Collapsed" IsHitTestVisible="True" 
+                        Background="#05000000">
+                </Grid>
+                <local:SettingsPanel x:Name="UserSettingsGrid" Visibility="Collapsed"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

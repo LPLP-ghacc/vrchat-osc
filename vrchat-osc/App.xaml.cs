@@ -4,9 +4,7 @@ using System.Windows;
 
 namespace vrchat_osc;
 
-/// <summary>
-/// Interaction logic for App.xaml
-/// </summary>
-public partial class App : Application
+public partial class App
 {
+    public const string APPNAME = "OSC VRCHAT";
 }

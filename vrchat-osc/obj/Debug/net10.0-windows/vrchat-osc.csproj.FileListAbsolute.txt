@@ -69,3 +69,11 @@ C:\Users\alpha\RiderProjects\vrchat-osc\vrchat-osc\bin\Debug\net10.0-windows\run
 C:\Users\alpha\RiderProjects\vrchat-osc\vrchat-osc\obj\Debug\net10.0-windows\vrchat-osc.csproj.AssemblyReference.cache
 C:\Users\alpha\RiderProjects\vrchat-osc\vrchat-osc\obj\Debug\net10.0-windows\vrchat-osc.csproj.Up2Date
 C:\Users\alpha\RiderProjects\vrchat-osc\vrchat-osc\bin\Debug\net10.0-windows\vrchat-osc.exe
+C:\Users\alpha\RiderProjects\vrchat-osc\vrchat-osc\obj\Debug\net10.0-windows\App.baml
+C:\Users\alpha\RiderProjects\vrchat-osc\vrchat-osc\obj\Debug\net10.0-windows\About.g.cs
+C:\Users\alpha\RiderProjects\vrchat-osc\vrchat-osc\obj\Debug\net10.0-windows\SettingsPanel.g.cs
+C:\Users\alpha\RiderProjects\vrchat-osc\vrchat-osc\obj\Debug\net10.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\alpha\RiderProjects\vrchat-osc\vrchat-osc\obj\Debug\net10.0-windows\About.baml
+C:\Users\alpha\RiderProjects\vrchat-osc\vrchat-osc\obj\Debug\net10.0-windows\SettingsPanel.baml
+C:\Users\alpha\RiderProjects\vrchat-osc\vrchat-osc\obj\Debug\net10.0-windows\NotificationWindow.g.cs
+C:\Users\alpha\RiderProjects\vrchat-osc\vrchat-osc\obj\Debug\net10.0-windows\NotificationWindow.baml
