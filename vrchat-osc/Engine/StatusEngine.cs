@@ -6,7 +6,8 @@ public enum StatusMode
 {
     Cycle,
     Combined,
-    Manual
+    Manual,
+    Template
 }
 
 public class StatusEngine(VrChatService vrChat)
@@ -20,9 +21,11 @@ public class StatusEngine(VrChatService vrChat)
     public string ManualText { get; set; } = "";
     public string PersistentText { get; set; } = "";
 
-    public int DelayMs { get; set; } = 3000;
+    public int DelayMs { get; init; } = 3000;
     public int MaxCombinedLength { get; set; } = 120;
 
+    public string Template { get; set; } = "";
+    
     public void AddModule(IStatusModule module)
     {
         _modules.Add(module);
@@ -32,11 +35,12 @@ public class StatusEngine(VrChatService vrChat)
     {
         while (!token.IsCancellationRequested)
         {
-            string text = Mode switch
+            var text = Mode switch
             {
                 StatusMode.Cycle => await BuildCycleText(),
                 StatusMode.Combined => await BuildCombinedText(),
                 StatusMode.Manual => ManualText,
+                StatusMode.Template => await BuildTemplateText(), // ← ВОТ ЭТО
                 _ => ""
             };
 
@@ -62,26 +66,25 @@ public class StatusEngine(VrChatService vrChat)
         var module = enabled[_index % enabled.Count];
         _index++;
 
-        return await module.GetTextAsync();
+        return await module.GetValueAsync();
     }
 
     private async Task<string> BuildCombinedText()
     {
         var enabled = _modules
             .Where(m => m.IsEnabled)
-            .OrderBy(m => m.Priority)
             .ToList();
 
         var parts = new List<string>();
 
         foreach (var module in enabled)
         {
-            var text = await module.GetTextAsync();
+            var value = await module.GetValueAsync();
 
-            if (string.IsNullOrWhiteSpace(text))
+            if (string.IsNullOrWhiteSpace(value))
                 continue;
 
-            parts.Add(text);
+            parts.Add(value);
 
             var combined = string.Join(" | ", parts);
 
@@ -90,5 +93,23 @@ public class StatusEngine(VrChatService vrChat)
         }
 
         return string.Join(" | ", parts);
+    }
+    
+    private async Task<string> BuildTemplateText()
+    {
+        if (string.IsNullOrWhiteSpace(Template))
+            return "";
+
+        var enabled = _modules.Where(m => m.IsEnabled);
+
+        var result = Template;
+
+        foreach (var module in enabled)
+        {
+            var value = await module.GetValueAsync();
+            result = result.Replace($"{{{module.Key}}}", value ?? "");
+        }
+
+        return result;
     }
 }

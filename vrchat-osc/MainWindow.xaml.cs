@@ -25,13 +25,16 @@ public partial class MainWindow
 
         var engine = new StatusEngine(vr)
         {
-            Mode = StatusMode.Combined,
+            Mode = StatusMode.Template,
+            Template = "{time}\n{hardware}\n{track}",
             DelayMs = 3000
         };
 
-        engine.AddModule(new TimeModule { IsEnabled = true });
-        engine.AddModule(new SystemStatsModule { IsEnabled = true });
-        engine.AddModule(new NetworkModule { IsEnabled = true });
+        engine.AddModule(new MusicModule { IsEnabled = true }); //track 
+        engine.AddModule(new TimeModule { IsEnabled = true }); //time
+        engine.AddModule(new NetworkModule { IsEnabled = true }); //ping
+        engine.AddModule(new HardwareModule() { IsEnabled = true }); //hardware
+        engine.AddModule(new WindowActivityModule() { IsEnabled = true }); //window
 
         _ = engine.StartAsync(_cts.Token);
     }

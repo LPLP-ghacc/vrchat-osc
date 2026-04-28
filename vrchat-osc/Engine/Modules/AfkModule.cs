@@ -4,9 +4,10 @@ namespace vrchat_osc.Modules;
 
 public class AfkModule : BaseModule
 {
-    public override string Name => "AFK";
+    public override string Key => "afk";
+
     public bool IsAfk { get; set; }
 
-    public override Task<string> GetTextAsync()
+    public override Task<string> GetValueAsync()
         => Safe(() => IsAfk ? "AFK" : "");
 }

@@ -2,10 +2,10 @@
 
 public class VrBatteryModule : BaseModule
 {
-    public override string Name => "VR Battery";
+    public override string Key => "battery";
 
     public int Battery { get; set; } = 100;
 
-    public override Task<string> GetTextAsync()
-        => Safe(() => $"{Battery}%");
+    public override Task<string> GetValueAsync()
+        => Safe(() => Battery.ToString());
 }

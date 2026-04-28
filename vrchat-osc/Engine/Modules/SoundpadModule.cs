@@ -2,10 +2,10 @@
 
 public class SoundpadModule : BaseModule
 {
-    public override string Name => "Soundpad";
+    public override string Key => "sound";
 
     public string CurrentSound { get; set; } = "";
 
-    public override Task<string> GetTextAsync()
-        => Safe(() => string.IsNullOrEmpty(CurrentSound) ? "" : $"{CurrentSound}");
+    public override Task<string> GetValueAsync()
+        => Safe(() => CurrentSound);
 }

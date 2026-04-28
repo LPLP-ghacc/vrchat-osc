@@ -2,10 +2,7 @@
 
 public interface IStatusModule
 {
-    string Name { get; }
+    string Key { get; }
     bool IsEnabled { get; set; }
-
-    int Priority { get; }
-
-    Task<string> GetTextAsync();
+    Task<string> GetValueAsync();
 }

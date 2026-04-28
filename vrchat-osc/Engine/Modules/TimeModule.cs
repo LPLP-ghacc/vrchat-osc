@@ -2,9 +2,8 @@
 
 public class TimeModule : BaseModule
 {
-    public override string Name => "Time";
-    public override int Priority => 1;
+    public override string Key => "time";
 
-    public override Task<string> GetTextAsync()
-        => Safe(() => $"{DateTime.Now:HH:mm}");
+    public override Task<string> GetValueAsync()
+        => Safe(() => DateTime.Now.ToString("HH:mm"));
 }

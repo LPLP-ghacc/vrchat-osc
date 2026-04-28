@@ -2,11 +2,10 @@
 
 public abstract class BaseModule : IStatusModule
 {
-    public abstract string Name { get; }
-    public virtual bool IsEnabled { get; set; } = false;
-    public virtual int Priority => 5;
+    public abstract string Key { get; }
+    public virtual bool IsEnabled { get; set; }
 
-    public abstract Task<string> GetTextAsync();
+    public abstract Task<string> GetValueAsync();
 
     protected static Task<string> Safe(Func<string> func)
     {

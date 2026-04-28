@@ -58,7 +58,7 @@ public class OscClient(string ip = "127.0.0.1", int port = 9000)
 
     private static void AddPaddedString(List<byte> data, string str)
     {
-        var bytes = Encoding.ASCII.GetBytes(str);
+        var bytes = Encoding.UTF8.GetBytes(str);
         data.AddRange(bytes);
         data.Add(0);
 

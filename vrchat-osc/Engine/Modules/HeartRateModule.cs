@@ -2,10 +2,10 @@
 
 public class HeartRateModule : BaseModule
 {
-    public override string Name => "HeartRate";
+    public override string Key => "bpm";
 
-    public int BPM { get; set; }
+    public int Bpm { get; set; }
 
-    public override Task<string> GetTextAsync()
-        => Safe(() => BPM > 0 ? $"{BPM} BPM" : "");
+    public override Task<string> GetValueAsync()
+        => Safe(() => Bpm > 0 ? Bpm.ToString() : "");
 }
