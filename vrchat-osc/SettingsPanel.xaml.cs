@@ -6,9 +6,13 @@ namespace vrchat_osc;
 
 public partial class SettingsPanel
 {
+    public static SettingsPanel? Instance;
+
     public SettingsPanel()
     {
         InitializeComponent();
+
+        Instance = this;
     }
 
     private void OpenGitHub(object sender, RoutedEventArgs e)

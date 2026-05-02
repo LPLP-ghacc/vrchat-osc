@@ -12,7 +12,7 @@ public partial class MainWindow
 {
     private readonly List<UIElement> _mainFieldElements = [];
     private UserSettings? _settings;
-    
+   
     private async void OnLoaded(object sender, RoutedEventArgs e)
     {
         try
@@ -24,23 +24,15 @@ public partial class MainWindow
                 SettingsManager.Save(_settings);
                 ShowNotificationButton();
                 
-                if (propertyChangedEventArgs.PropertyName == nameof(UserSettings.RunAtWindowsStartup))
-                    ApplyStartupSetting();
             };
+
+            if (SettingsPanel.Instance != null)
+                SettingsManager.GenerateUI(SettingsPanel.Instance.UserSettingsField, _settings);
         }
         catch (Exception ex)
         {
             ex.Message.Log();
         }
-    }
-    
-    private void ApplyStartupSetting()
-    {
-        var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
-        if (_settings!.RunAtWindowsStartup)
-            key?.SetValue(App.APPNAME, $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location}\"");
-        else
-            key?.DeleteValue(App.APPNAME, false);
     }
 
     private void ShowNotificationButton() => NotificationButton.Visibility = Visibility.Visible;

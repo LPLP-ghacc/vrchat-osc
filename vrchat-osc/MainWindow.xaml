@@ -59,7 +59,7 @@
         </Style>
     </Window.Resources>
     
- <Grid x:Name="RootGrid" CacheMode="BitmapCache">
+    <Grid x:Name="RootGrid" CacheMode="BitmapCache">
         <Grid.Background>  
             <ImageBrush x:Name="RootImageBrush" Stretch="UniformToFill" Opacity="0.3"/>     
         </Grid.Background>
@@ -167,33 +167,37 @@
                     
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="360" MinWidth="360" MaxWidth="360"/>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        
-                        
-                        <Grid Column="1">
-                            <TextBox x:Name="InputBox" 
-                                     Style="{StaticResource FlatTextBoxStyle}"
-                                     Foreground="{StaticResource PrimaryTextBrush}"
-                                     Background="#3D4756"
-                                     FontFamily="Consolas"
-                                     HorizontalContentAlignment="Center"
-                                     VerticalContentAlignment="Center"
-                                     FontSize="24"
-                                     KeyDown="InputBox_KeyDown"
-                                     Padding="4"
-                                     Margin="5,5,5,5"
-                                     BorderBrush="Gray"
-                                     BorderThickness="1"
-                                     AcceptsReturn="True"
-                                     TextWrapping="Wrap"/>
+                        <Grid Column="0" Margin="10">
+                            <Border CornerRadius="5"
+                                    Background="#3A516D"
+                                    Padding="10"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    MaxWidth="400">
+    
+                                <TextBlock x:Name="ActualText"
+                                           TextWrapping="Wrap"
+                                           TextAlignment="Center"
+                                           FontSize="22" Text="467219046217904621790gv412796"/>
+                            </Border>
+                            
                         </Grid>
-                    </Grid>
+                        <Grid Column="1">
+                            <StackPanel x:Name="MainPanel" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Column="2">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                
+                            </StackPanel>
+                        </Grid>
                 </Grid>
                 <local:SettingsPanel x:Name="UserSettingsGrid" Visibility="Collapsed"/>
             </Grid>
         </Grid>
-    </Grid>
+        </Grid>
+     </Grid>
 </Window>

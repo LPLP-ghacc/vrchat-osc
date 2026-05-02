@@ -20,14 +20,6 @@ public class SeparatorAttribute() : Attribute {}
 
 public class UserSettings : INotifyPropertyChanged
 {
-    [Header("App Settings")]
-    [DisplayName("Run at Windows startup")]
-    public bool RunAtWindowsStartup
-    {
-        get;
-        init => Set(ref field, value);
-    }
-    
     [DisplayName("Enable logging")]
     public bool IsEnableLog
     {
@@ -52,7 +44,6 @@ public class UserSettings : INotifyPropertyChanged
     public static UserSettings Default =>
         new()
         {
-            RunAtWindowsStartup = false,
             IsEnableLog = true,
             MinimizeToTrayOnClose = false,
             FontFamily = "Consolas",

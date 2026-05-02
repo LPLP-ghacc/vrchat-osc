@@ -28,22 +28,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-        
-                        <TextBlock Text="CPU:" VerticalAlignment="Center"/>
-                        <ProgressBar Grid.Row="0" Grid.Column="1" x:Name="CpuProgressBar" Height="20" Margin="10,0" 
-                                     Maximum="100" Value="0" Foreground="#FF60CDFF"/>
-                        <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                   Text="{Binding ElementName=CpuProgressBar, Path=Value, StringFormat={}{0:F1}%}"/>
-        
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="RAM:" VerticalAlignment="Center" Margin="0,10,0,0"/>
-                        <ProgressBar Grid.Row="1" Grid.Column="1" x:Name="RamProgressBar" Height="20" Margin="10,0" 
-                                     Maximum="16384" Value="0" Foreground="#FFFFA060"/>
-                        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                   Text="{Binding ElementName=RamProgressBar, Path=Value, StringFormat={}{0} MB}"/>
                     </Grid>
-    
-                    <TextBlock x:Name="ResourceMonitorOutput" Style="{StaticResource FlatTextBlockStyle}" 
-                               Text="collecting data..." Margin="10"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Row="1">
                     <Button x:Name="OpenGitHubButton" Content="Project GitHub page..." Height="30" Margin="5" Style="{StaticResource FlatButtonStyle}" Click="OpenGitHub"/>

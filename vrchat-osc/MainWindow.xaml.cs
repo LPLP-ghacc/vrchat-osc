@@ -1,4 +1,7 @@
-﻿using System.Windows.Input;
+﻿using System.Diagnostics;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using vrchat_osc.Modules;
 using vrchat_osc.Services;
 
@@ -8,7 +11,6 @@ public partial class MainWindow
 {
     public static MainWindow Instance { get; private set; } = null!;
     private readonly CancellationTokenSource _cts = new();
-    
     private readonly StatusEngine _engine;
     
     public MainWindow()
@@ -18,6 +20,8 @@ public partial class MainWindow
         Instance = this;
         
         Loaded += OnLoaded;
+        
+        InitTextBoxes(6);
         
         _mainFieldElements.Add(MainGrid);
         _mainFieldElements.Add(UserSettingsGrid);
@@ -32,21 +36,53 @@ public partial class MainWindow
             DelayMs = 3000
         };
 
-        _engine.AddModule(new MusicModule { IsEnabled = true }); //track 
-        _engine.AddModule(new TimeModule { IsEnabled = true }); //time
-        _engine.AddModule(new NetworkModule { IsEnabled = true }); //ping
-        _engine.AddModule(new HardwareModule() { IsEnabled = true }); //hardware
-        _engine.AddModule(new WindowActivityModule() { IsEnabled = true }); //window
-        _engine.AddModule(new SoundpadModule() { IsEnabled = true }); //soundpad
-        _engine.AddModule(new AfkModule() { IsEnabled = true }); //afk
+        _engine.AddModule(new MusicModule { IsEnabled = false }); //track 
+        _engine.AddModule(new TimeModule { IsEnabled = false }); //time
+        _engine.AddModule(new NetworkModule { IsEnabled = false }); //ping
+        _engine.AddModule(new HardwareModule() { IsEnabled = false }); //hardware
+        _engine.AddModule(new WindowActivityModule() { IsEnabled = false }); //window
+        _engine.AddModule(new SoundpadModule() { IsEnabled = false }); //soundpad
+        _engine.AddModule(new AfkModule() { IsEnabled = false }); //afk
         
         _ = _engine.StartAsync(_cts.Token);
     }
 
-    private void InputBox_KeyDown(object sender, KeyEventArgs e)
+    private void InitTextBoxes(int size)
     {
-        if(!string.IsNullOrEmpty(InputBox.Text))
-            _engine.Template = InputBox.Text;
+        for (var i = 0; i < size; i++)
+        {
+            var box = new OneStringTextBox(i + 1, string.Empty, (sender, _) =>
+            {
+                var box = sender as TextBox;
+                Debug.Assert(box != null, nameof(box) + " != null");
+                if (string.IsNullOrEmpty(box.Text)) return;
+
+                SetText();
+            });
+            MainPanel.Children.Add(box);
+        }
+    }
+
+    public void SetText()
+    {
+        var text = string.Empty;
+
+        foreach (UIElement mainPanelChild in MainPanel.Children)
+        {
+            if (mainPanelChild is not OneStringTextBox mainTextBox) continue;
+            if (!string.IsNullOrEmpty(mainTextBox.GetText()))
+                text += mainTextBox.GetText() + Environment.NewLine;
+        }
+
+        if (text.Length > 144)
+            text = text[..144];
+
+        _engine.Modules.ForEach(module =>
+        {
+            module.IsEnabled = text.Contains($"{{{module.Key}}}");
+        });
+
+        _engine.Template = text;
     }
     
     public static void Log(string message) => Console.WriteLine(message);
