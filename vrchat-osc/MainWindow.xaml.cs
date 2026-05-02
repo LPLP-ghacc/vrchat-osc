@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using vrchat_osc.Modules;
 using vrchat_osc.Services;
 
@@ -22,6 +23,7 @@ public partial class MainWindow
         Loaded += OnLoaded;
         
         InitTextBoxes(6);
+        InitEmojisButtons();
         
         _mainFieldElements.Add(MainGrid);
         _mainFieldElements.Add(UserSettingsGrid);
@@ -43,6 +45,7 @@ public partial class MainWindow
         _engine.AddModule(new WindowActivityModule() { IsEnabled = false }); //window
         _engine.AddModule(new SoundpadModule() { IsEnabled = false }); //soundpad
         _engine.AddModule(new AfkModule() { IsEnabled = false }); //afk
+        _engine.AddModule(new ProgressModule() { IsEnabled = false }); //progress
         
         _ = _engine.StartAsync(_cts.Token);
     }
@@ -63,7 +66,7 @@ public partial class MainWindow
         }
     }
 
-    public void SetText()
+    private void SetText()
     {
         var text = string.Empty;
 
@@ -76,11 +79,9 @@ public partial class MainWindow
 
         if (text.Length > 144)
             text = text[..144];
-
-        _engine.Modules.ForEach(module =>
-        {
-            module.IsEnabled = text.Contains($"{{{module.Key}}}");
-        });
+        
+        //set enable modules by keywords 
+        _engine.Modules.ForEach(module => module.IsEnabled = text.Contains($"{{{module.Key}}}"));
 
         _engine.Template = text;
     }

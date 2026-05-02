@@ -56,6 +56,9 @@ public class StatusEngine(VrChatService vrChat)
             var value = await module.GetValueAsync();
             result = result.Replace($"{{{module.Key}}}", value ?? "").Trim();
         }
+        if (result.Length > 144)
+            result = result[..144];
+        
         MainWindow.Instance.ActualText.Text = result.Trim();
         return result;
     }

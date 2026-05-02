@@ -12,7 +12,6 @@ public partial class OneStringTextBox
         InputBox.TextChanged += handler;
         InputBox.Text = text;
         Counter.Text = index.ToString();
-        
     }
 
     public string GetText()

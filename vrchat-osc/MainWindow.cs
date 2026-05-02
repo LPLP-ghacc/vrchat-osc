@@ -35,6 +35,125 @@ public partial class MainWindow
         }
     }
 
+        private void InitEmojisButtons()
+    {
+        Emojis.Children.Clear();
+
+        var categories = new Dictionary<string, string[]>
+        {
+            ["🙂 Basic"] =
+            [
+                "😀","😁","😂","🤣","😃","😄","😅","😆","😉","😊","😋","😎",
+                "😍","😘","😗","😙","😚","🙂","🤗","🤩","🤔","🤨","😐","😑",
+                "😶","🙄","😏","😣","😥","😮","🤐","😯","😪","😫","🥱","😴"
+            ],
+
+            ["❤️ Emotions"] =
+            [
+                "❤️","💔","💖","💘","💝","💞","💕","💓","💗","💙","💚","💛",
+                "💜","🖤","🤍","🤎","💢","💥","💫","💦","💨","🫶","❣️","💟"
+            ],
+
+            ["👍 Gestures"] =
+            [
+                "👍","👎","👌","🤌","🤏","✌️","🤞","🤟","🤘","👏","🙌",
+                "👐","🤲","🙏","👋","🤝","💪","🖕","✋","🤚","🫱","🫲"
+            ],
+
+            ["🔥 Popular ones"] =
+            [
+                "🔥","💀","👀","🎉","💯","✨","⚡","🚀","🎶","🎵",
+                "🏆","🥇","🎯","📢","💡","📌","⭐","🌟","✔️","❌"
+            ],
+
+            ["😂 Reactions"] =
+            [
+                "😭","😡","😱","🥶","🥵","🤯","😳","🥴","🤮","🤢",
+                "😈","👿","🤡","💩","👻","👽","🤖","😺","😸","😹"
+            ],
+
+            ["🐾 Animals"] =
+            [
+                "🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐨","🐯",
+                "🦁","🐸","🐵","🐧","🐦","🐤","🐺","🐗","🐴","🦄"
+            ],
+
+            ["🍔 Meal"] =
+            [
+                "🍎","🍌","🍇","🍓","🍒","🍑","🍍","🥝","🍅","🥑",
+                "🍔","🍟","🍕","🌭","🍿","🥓","🍗","🍩","🍪","🎂"
+            ],
+
+            ["⚙️ Objects"] =
+            [
+                "⌚","📱","💻","⌨️","🖥️","🖨️","🖱️","💾","📷","📹",
+                "🎧","📡","🔋","🔌","💡","🔦","🧯","🛠️","⚙️","🔧"
+            ],
+
+            ["🧠 Other"] =
+            [
+                "🧠","👁️","🗿","⚠️","❗","❓","🔴","🟢","🔵","🟡",
+                "⬆️","⬇️","⬅️","➡️","🔺","🔻","◼️","◻️","▪️","▫️"
+            ]
+        };
+        
+        var block = new TextBlock
+        {
+            Text = "click on the emoji to copy",
+            FontSize = 16,
+            TextAlignment = TextAlignment.Center
+        };
+        Emojis.Children.Add(block);
+        
+        foreach (var category in categories)
+        {
+            var categoryPanel = new StackPanel
+            {
+                Orientation = Orientation.Vertical,
+                Margin = new Thickness(3)
+            };
+
+            var header = new TextBlock
+            {
+                Text = category.Key,
+                FontSize = 14,
+                Margin = new Thickness(3),
+                Foreground = System.Windows.Media.Brushes.White,
+                FontFamily = new FontFamily("Segoe UI Emoji")
+            };
+
+            categoryPanel.Children.Add(header);
+
+            var wrap = new WrapPanel
+            {
+                Margin = new Thickness(3)
+            };
+
+            foreach (var emoji in category.Value)
+            {
+                var btn = new Button
+                {
+                    Content = emoji,
+                    Width = 35,
+                    Height = 35,
+                    Margin = new Thickness(3),
+                    FontSize = 18,
+                    FontFamily = new FontFamily("Segoe UI Emoji")
+                };
+
+                btn.Click += (s, e) =>
+                {
+                    Clipboard.SetText(emoji);
+                };
+
+                wrap.Children.Add(btn);
+            }
+            
+            categoryPanel.Children.Add(wrap);
+            Emojis.Children.Add(categoryPanel);
+        }
+    }
+    
     private void ShowNotificationButton() => NotificationButton.Visibility = Visibility.Visible;
 
     private void Minimize_OnClick_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;

@@ -162,8 +162,7 @@
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="1">
-                <Grid x:Name="MainGrid" Visibility="Visible" IsHitTestVisible="True" 
-                        Background="#05000000">
+                <Grid x:Name="MainGrid" Visibility="Visible" IsHitTestVisible="True" Background="#05000000">
                     
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -182,7 +181,7 @@
                                 <TextBlock x:Name="ActualText"
                                            TextWrapping="Wrap"
                                            TextAlignment="Center"
-                                           FontSize="22" Text="467219046217904621790gv412796"/>
+                                           FontSize="22"/>
                             </Border>
                             
                         </Grid>
@@ -190,9 +189,13 @@
                             <StackPanel x:Name="MainPanel" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Column="2">
-                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                                
-                            </StackPanel>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                          HorizontalScrollBarVisibility="Disabled">
+                                    
+                                <StackPanel x:Name="Emojis" Orientation="Vertical">
+                                    <TextBlock Text="click on the emoji to copy" FontSize="16" TextAlignment="Center"/>
+                                </StackPanel>
+                            </ScrollViewer>
                         </Grid>
                 </Grid>
                 <local:SettingsPanel x:Name="UserSettingsGrid" Visibility="Collapsed"/>
